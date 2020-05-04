@@ -1,0 +1,43 @@
+#kind: PersistentVolume
+#apiVersion: v1
+#metadata:
+#  name: influx-pv
+#  namespace: monitoring
+#spec:
+#  storageClassName: hostpath
+#  capacity:
+#    storage: 100Gi
+#  accessModes:
+#  - ReadWriteOnce
+#  hostPath:
+#    path: "/media/nfs/k8spvc"
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: influxdb-pv
+  namespace: monitoring
+spec:
+  capacity:
+    storage: 50Gi 
+  accessModes:
+  - ReadWriteOnce 
+  nfs: 
+    path: /mnt/burnyd/
+    server: 192.168.8.2
+    #persistentVolumeReclaimPolicy: Recycle 
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: influxdb
+  name: influxdb-pvc
+  namespace: monitoring
+spec:
+ #storageClassName: local-storage
+  storageClassName: ""
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

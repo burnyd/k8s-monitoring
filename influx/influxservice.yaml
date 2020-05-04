@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb
+  labels:
+    app: influxdb
+  namespace: monitoring
+spec:
+  externalIPs:
+  - 10.168.57.254
+  ports:
+  - port: 8086
+    protocol: TCP
+  selector:
+    app: influxdb
