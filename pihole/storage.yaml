@@ -1,0 +1,92 @@
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-local
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pihole-local-etc-volume
+  labels:
+    directory: etc
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: nfs-local
+  local:
+    path: /media/k8s/pihole/etc
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node1
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pihole-local-etc-claim
+spec:
+  storageClassName: nfs-local
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      directory: etc
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pihole-local-dnsmasq-volume
+  labels:
+    directory: dnsmasq.d
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: nfs-local
+  local:
+    path: /media/k8s/pihole/dns
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node1
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pihole-local-dnsmasq-claim
+spec:
+  storageClassName: nfs-local
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+  selector:
+    matchLabels:
+      directory: dnsmasq.d
