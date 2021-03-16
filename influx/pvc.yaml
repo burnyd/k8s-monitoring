@@ -21,10 +21,19 @@ spec:
     storage: 50Gi 
   accessModes:
   - ReadWriteOnce 
-  nfs: 
-    path: /mnt/burnyd/
-    server: 192.168.8.2
-    #persistentVolumeReclaimPolicy: Recycle 
+  local: 
+    path: /media/k8s/influx/
+  storageClassName: nfs-local
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node2
+
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -34,10 +43,9 @@ metadata:
   name: influxdb-pvc
   namespace: monitoring
 spec:
- #storageClassName: local-storage
-  storageClassName: ""
+  storageClassName: nfs-local
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 50Gi

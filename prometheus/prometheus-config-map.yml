@@ -14,7 +14,7 @@ data:
     scrape_configs:
       - job_name: 'node-exporter'
         static_configs:
-        - targets: ['192.168.2.100:9100', '10.1.1.220:9100', '10.1.1.221:9100', '10.1.1.222:9100']
+        - targets: ['10.1.1.220:9100', '10.1.1.221:9100', '10.1.1.222:9100']
 
       - job_name: 'kubernetes-nodes'
         kubernetes_sd_configs:
@@ -114,6 +114,6 @@ data:
       
       - job_name: 'hass'
         metrics_path: /api/prometheus
-        bearer_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI0MjU2ODc4NWQxZjg0NmI4YmUxYzJiMDZkOWM1ZDhmYiIsImlhdCI6MTU4ODQ1MTU2OCwiZXhwIjoxOTAzODExNTY4fQ.mlUISOnj36VH9NePwF9fvAXvN5GTiwjiEK-6mnAQskQ'
+        bearer_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5ZGMwNDdjNjQ2ZTQ0Y2YzYTNjY2ZmZDZhZTI0NTFhMCIsImlhdCI6MTYxNTc2MzA3NCwiZXhwIjoxOTMxMTIzMDc0fQ.Cj2Lr54b2Obu6T8B07a63M9l1nQjdUZpBTeHGkT_fBo'
         static_configs:
-                - targets: ['10.1.1.201:8123']
+                - targets: ['192.168.4.207:8123']

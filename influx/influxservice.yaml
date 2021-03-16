@@ -11,5 +11,8 @@ spec:
   ports:
   - port: 8086
     protocol: TCP
+    nodePort: 30986
+    targetPort: 8086
   selector:
     app: influxdb
+  type: NodePort

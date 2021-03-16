@@ -17,7 +17,7 @@ metadata:
     prometheus.io/scrape: 'true'
     prometheus.io/port:   '9090'
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: prometheus
@@ -43,7 +43,6 @@ spec:
         configMap:
           name: prometheus-config
       serviceAccountName: default
-          #ServiceAccountName: prometheus
 
 ---
 
