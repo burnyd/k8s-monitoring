@@ -28,7 +28,8 @@ spec:
     spec:
       containers:
       - name: prometheus-cont
-        image: prom/prometheus:v2.17.2
+        #image: prom/prometheus:v2.17.2
+        image: prom/prometheus:v2.25.1
         args:
           - --web.enable-lifecycle
           - --config.file=/etc/prometheus/prometheus.yml
