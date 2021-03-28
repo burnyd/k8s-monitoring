@@ -113,8 +113,11 @@ data:
           target_label: kubernetes_name
       
       - job_name: 'hass'
-        scheme: https
-        metrics_path: '/api/prometheus'
+        scrape_interval: 60s
+        metrics_path: /api/prometheus
+
         bearer_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5ZGMwNDdjNjQ2ZTQ0Y2YzYTNjY2ZmZDZhZTI0NTFhMCIsImlhdCI6MTYxNTc2MzA3NCwiZXhwIjoxOTMxMTIzMDc0fQ.Cj2Lr54b2Obu6T8B07a63M9l1nQjdUZpBTeHGkT_fBo'
+
+        scheme: https
         static_configs:
-        - targets: ['burnydha.duckdns.org:8123']
+          - targets: ['burnydha.duckdns.org:8123']
