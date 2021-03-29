@@ -1,0 +1,27 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: grafana-export-py
+  namespace: monitoring
+spec:
+  #schedule: "0 1 * * *"
+  schedule: "*/1 * * * *"
+  startingDeadlineSeconds: 20
+  successfulJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      completions: 1
+      template:
+        spec:
+          containers:
+          - name: python
+            image: python:3.7
+            command: ["python", /configmap/export.py"]
+            volumeMounts:
+              - name: configmap
+                mountPath: /configmap
+          restartPolicy: Never
+          volumes:
+            - name: configmap
+              configMap:
+                name: grafana-export-cm
