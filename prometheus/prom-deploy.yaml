@@ -32,7 +32,6 @@ spec:
          - burnydha.duckdns.org
       containers:
       - name: prometheus-cont
-        #image: prom/prometheus:v2.17.2
         image: prom/prometheus:v2.25.1
         args:
           - --web.enable-lifecycle
@@ -41,12 +40,18 @@ spec:
         - name: config-volume
           mountPath: /etc/prometheus/prometheus.yml
           subPath: prometheus.yml
+        - name: config-rules
+          mountPath: /etc/prometheus/rules.yml
+          subPath: rules.yml
         ports:
         - containerPort: 9090
       volumes:
       - name: config-volume
         configMap:
           name: prometheus-config
+      - name: config-rules
+        configMap:
+          name: rules-config
       serviceAccountName: default
 
 ---
