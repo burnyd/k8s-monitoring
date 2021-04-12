@@ -26,6 +26,10 @@ data:
         static_configs:
         - targets: ['10.1.1.220:9100', '10.1.1.221:9100', '10.1.1.222:9100', '192.168.2.100:9100']
 
+      - job_name: 'Ubiquiti exporter'
+        static_configs:
+        - targets: ['192.168.2.100:9130']
+
       - job_name: 'kubernetes-nodes'
         kubernetes_sd_configs:
         - role: node
