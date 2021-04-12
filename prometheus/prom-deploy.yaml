@@ -45,6 +45,12 @@ spec:
           subPath: rules.yml
         ports:
         - containerPort: 9090
+        env:
+        - name: slacktoken
+          valueFrom:
+            configMapKeyRef:
+              name: promslackapi
+              key: PROMSLACKAPI
       volumes:
       - name: config-volume
         configMap:

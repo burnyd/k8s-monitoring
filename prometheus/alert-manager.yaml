@@ -24,7 +24,7 @@ data:
     receivers:
     - name: slack-notify
       slack_configs:
-      - api_url: https://hooks.slack.com/services/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
+      - api_url: $PROMSLACKAPI
         channel: '#ops'
 
 ---
